@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+$fifo = 'in'
+$samples = {}
+
+def store(fields)
+  labels = [:name, :start, :end, :loops, :location]
+  new = Hash[labels.zip(fields)]
+  $samples[new[:name]] = new
+  $samples[new[:name]][:location].chomp!
+  print "Storing Sample:: "
+  printSample(new[:name])
+end
+
+def play(fields)
+  sample = $samples[fields[0]]
+  loops = fields[1].to_i * sample[:loops].to_i
+  player = fork do
+    exec "mpg123 -k #{sample[:start]} -n #{sample[:end]} --loop #{loops} '#{sample[:location]}' & disown"
+  end
+  Process.detach(player)
+end
+
+def printSample(name)
+  s = $samples[name]
+  #puts "Sample #{name} from #{s[:location]}"
+  puts "#{name}\t(#{s[:start]} - #{s[:end]})\t#{s[:loops]}x"
+end
+
+def main
+  input = open($fifo, "r+")
+  loop do
+    line = input.gets
+
+    command = line.split(' ')[0]
+    fields = line[command.size+1..-1].split(',')
+
+    case command
+    when "store"
+      store(fields)
+    when "samples"
+      $samples.each_key do |key|
+        printSample(key)
+      end
+    when "play"
+      play(fields)
+    else
+      puts "'#{command}' is an invalid command"
+    end
+  end
+end
+
+main
