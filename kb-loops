@@ -14,6 +14,9 @@ end
 
 def play(fields)
   sample = $samples[fields[0]]
+  if (!sample) then
+    return
+  end
   loops = fields[1].to_i * sample[:loops].to_i
   player = fork do
     exec "mpg123 -k #{sample[:start]} -n #{sample[:end]} --loop #{loops} '#{sample[:location]}' & disown"

@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 require 'io/console'
-$bindings = {
-  'a' => 'introduction',
-  'b' => 'stick'
-}
 $fifo = 'in'
-
 
 buff = ''
 loop do
@@ -18,12 +13,10 @@ loop do
     if (buff == '') then
       buff = 1
     end
-    sam = $bindings[c]
-    if (sam) then
-      command = "play #{sam},#{buff}"
-      %x[echo #{command} > #{$fifo}]
-      puts command
-    end
+
+    command = "play #{c},#{buff}"
+    %x[echo #{command} > #{$fifo}]
+    puts command
     buff = ''
   end
 end
