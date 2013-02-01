@@ -2,7 +2,7 @@ store a,20,40,1,/home/mil/Media/Samples/progger/a.mp3
 store b,20,40,1,/home/mil/Media/Samples/progger/b.mp3
 store c,4,60,1,/home/mil/Media/Samples/progger/c.mp3
 store d,20,40,1,/home/mil/Media/Samples/progger/d.mp3
-store wave,10,340,1,/home/mil/Media/Samples/progger/progressive-wave.mp3
-store down,10,340,1,/home/mil/Media/Samples/progger/going-down.mp3
-store interlude,10,670,1,/home/mil/Media/Samples/progger/interlude.mp3
-store slowly,0,110,1,/home/mil/Media/Samples/progger/slowly.mp3
+store u,10,340,1,/home/mil/Media/Samples/progger/progressive-wave.mp3
+store i,10,340,1,/home/mil/Media/Samples/progger/going-down.mp3
+store o,10,670,1,/home/mil/Media/Samples/progger/interlude.mp3
+store p,0,110,1,/home/mil/Media/Samples/progger/slowly.mp3
